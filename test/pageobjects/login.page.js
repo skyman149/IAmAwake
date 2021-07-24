@@ -4,7 +4,7 @@ class LoginPage extends Page {
 
     get inputUsername () { return $('#normal_login_email'); }
     get inputPassword () { return $('#normal_login_password'); }
-    get btnSubmit () { return $('.login-form-button'); }
+    get buttonSubmit () { return $('.login-form-button'); }
 
     setLogin (email) {
         this.inputUsername.setValue(email); // this -> обращаемся к текущему обьэкту (inputUsername)
