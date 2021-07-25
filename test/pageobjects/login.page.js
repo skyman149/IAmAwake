@@ -5,7 +5,12 @@ class LoginPage extends Page {
     get inputUsername () { return $('#normal_login_email'); }
     get inputPassword () { return $('#normal_login_password'); }
     get buttonSubmit () { return $('.login-form-button'); }
-    get errorToast () { return $('.ant-notification-notice-message');}
+    get errorToast () { return $('.ant-notification-notice-message'); }
+    get loginValidationError () { return $('//div[contains(@class, "ant-form-item-with-help")][.//input[@id="normal_login_email"]]//div[@role="alert"]'); }
+
+    open () {
+        return super.open('/user/login');
+    }
 
     setLogin (email) {
         this.inputUsername.setValue(email); // this -> обращаемся к текущему обьэкту (inputUsername)
@@ -27,8 +32,13 @@ class LoginPage extends Page {
         expect(this.errorToast).toBeDisplayed();
     }
 
-    open () {
-        return super.open('/user/login');
+    emptyLoginInput () {
+        this.clearInput(this.inputUsername); // this.inputUsername goes to clearInput(element) method
+    }
+
+    loginRequiredError () {
+        expect(this.loginValidationError).toBeDisplayed();
+        expect(this.loginValidationError.getText()).toEqual('Required');
     }
 }
 

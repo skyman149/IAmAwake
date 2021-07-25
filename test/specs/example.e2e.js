@@ -12,22 +12,28 @@ describe('Auth', () => {
         browser.execute('window.localStorage.clear()')
     })
 
-    it('should login with valid credentials',  () => {
+    it('TC-01 should login with valid credentials',  () => {
         LoginPage.setLogin('skyvka.anton@gmail.com');
         LoginPage.setPassword('149pasv');
         LoginPage.clickSubmitButton();
         ProfilePage.isOpen();
     });
 
-    it('submit button is disabled if no login and password provided',  () => {
+    it('TC-02 submit button is disabled if no login and password provided',  () => {
         LoginPage.submitButtonIsDisabled();
     });
 
-    it('auth fails if invalid credentials provided',  () => {
+    it('TC-03 auth fails if invalid credentials provided',  () => {
         LoginPage.setLogin('hjhklds@iuiui.com');
         LoginPage.setPassword('01010102');
         LoginPage.clickSubmitButton();
         LoginPage.errorToastAppeared();
+    });
+
+    it('TC-04 login input is required',  () => {
+        LoginPage.setLogin('example');
+        LoginPage.emptyLoginInput();
+        LoginPage.loginRequiredError();
     });
 
 });
